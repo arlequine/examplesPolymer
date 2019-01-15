@@ -1,0 +1,46 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<!--
+-Realizar un componente que recorra un arreglo de nombres de usuario
+-El componente debe tener un input de tipo texto y un boton que al darle click agregue el nombre del usuario al arreglo
+-El arreglo debe ser un arreglo de Objetos
+-Cada elemento del arreglo mostrado en el DOM debe tener 2 botones
+*1. Eliminar usuario en cuestion
+*2. Contar las veces que se le de click al elemento
+  -El contador de cada elemento debe mostrarse en el DOM
+ -->
+<dom-module id="users-component">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+    </style>
+    <h1>desde users</h1>
+    <ul>
+
+
+  </ul>
+  </template>
+  <script>
+    (function usersComponent(customElements) {
+      'use strict';
+      class UsersComponent  extends Polymer.Element {
+        static get is() {return 'users-component'};
+        // static get template() {
+        //   return Polymer.html `<p>template 2</p>`;
+        // }
+        static get properties() {
+          return {
+
+          }
+        }
+        ready() {
+          super.ready();
+          console.log('ready');
+        }
+
+      }
+    customElements.define(UsersComponent.is, UsersComponent)
+  })(window.customElements);
+  </script>
+</dom-module>

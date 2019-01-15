@@ -1,0 +1,100 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="./users-component.html">
+<link rel="import" href="./style-module.html">
+<!--
+-Realizar un componente que recorra un arreglo de nombres de usuario
+-El componente debe tener un input de tipo texto y un boton que al darle click agregue el nombre del usuario al arreglo
+-El arreglo debe ser un arreglo de Objetos
+-Cada elemento del arreglo mostrado en el DOM debe tener 2 botones
+*1. Eliminar usuario en cuestion
+*2. Contar las veces que se le de click al elemento
+  -El contador de cada elemento debe mostrarse en el DOM
+-->
+<dom-module id="my-component">
+  <template>
+    <style include="style-module"></style>
+    <h1>Add a user</h1>
+    <input type="text" name="name" value="{{newUser::input}}" >
+    <button type="button" name="button" on-click="_addUser">Add User</button>
+
+    <h1>Users list</h1>
+    <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
+      <div class$="{{scoreColor(user)}}">
+        <p>
+          Name: [[user.name]]
+        </p>
+        <p>
+          Score: [[user.score]]
+        </p>
+      </div>
+    </template>
+  </template>
+
+  <script>
+    (function myComponent(customElements) {
+      'use strict';
+      class MyComponent  extends Polymer.Element {
+        static get is() {return 'my-component'};
+
+        static get properties() {
+          return {
+            users: {
+              type: Array,
+              value: [
+                {
+                  name:'Luis',
+                  score: 4
+                },
+                {
+                  name:'Damian',
+                  score: 6
+                },
+                {
+                  name:'Alejandro',
+                  score: 5.3
+                },
+                {
+                  name:'Alejandro',
+                  score: 8
+                },
+                {
+                  name:'Alejandro',
+                  score: 1
+                },
+                {
+                  name:'Alejandro',
+                  score: 9
+                },
+                {
+                  name:'Alejandro',
+                  score: 10
+                }
+              ]
+            },
+            colorScore: {
+              type: String,
+              observer: 'scoreColor'
+            }
+          }
+        }
+        ready() {
+          super.ready();
+          console.log('ready');
+        }
+        scoreColor(e) {
+          let score = e.score;
+          console.log();
+          if (score <= 5.9) {
+            return 'bg-reprobado'
+          } else if (score >= 6) {
+            return 'bg-aprobado'
+          }
+        }
+        _sort(a, b) {
+          return a.name > b.name;
+        }
+      }
+    customElements.define(MyComponent.is, MyComponent)
+  })(window.customElements);
+  </script>
+</dom-module>

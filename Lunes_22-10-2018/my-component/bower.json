@@ -1,0 +1,14 @@
+{
+  "name": "my-component",
+  "authors": [
+    "Jose Alfredo Hernandez Noriega <josealfredo.hernandez.noriega.contractor@bbva.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "polymer": "^2.0.0",
+    "paper-button": "PolymerElements/paper-button#^2.1.3"
+  }
+}

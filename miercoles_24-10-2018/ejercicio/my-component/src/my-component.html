@@ -1,0 +1,86 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="./users-component.html">
+<!--
+-Realizar un componente que recorra un arreglo de nombres de usuario
+-El componente debe tener un input de tipo texto y un boton que al darle click agregue el nombre del usuario al arreglo
+-El arreglo debe ser un arreglo de Objetos
+-Cada elemento del arreglo mostrado en el DOM debe tener 2 botones
+*1. Eliminar usuario en cuestion
+*2. Contar las veces que se le de click al elemento
+  -El contador de cada elemento debe mostrarse en el DOM
+ -->
+<dom-module id="my-component">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+    </style>
+    <h1>Add a user</h1>
+    <input type="text" name="name" value="{{newUser::input}}" >
+    <button type="button" name="button" on-click="_addUser">Add User</button>
+
+    <h1>Users list</h1>
+    <template is="dom-repeat" items="{{users}}" as="user" sort="_sort">
+      <li>
+        [[user.name]]
+        [[user.count]]
+        <button type="button" name="button" on-click="_countClick">Counter</button>
+        <button type="button" name="button" on-click="_deleteUser">Delete User</button>
+      </li>
+    </template>
+  </template>
+
+  <script>
+    (function myComponent(customElements) {
+      'use strict';
+      class MyComponent  extends Polymer.Element {
+        static get is() {return 'my-component'};
+
+        static get properties() {
+          return {
+            users: {
+              type: Array,
+              value: [
+                {
+                  name:'Luis',
+                  count: 0
+                },
+                {
+                  name:'Damian',
+                  count: 0
+                },
+                {
+                  name:'Alejandro',
+                  count: 0
+                }
+              ]
+            }
+          }
+        }
+        ready() {
+          super.ready();
+          console.log('ready');
+        }
+        _addUser() {
+          let userNew = this.newUser;
+          this.push('users', {name: userNew, count: 0})
+        }
+        _deleteUser(e) {
+          let currentUser = e.model.user;
+          var index = this.users.indexOf(currentUser);
+          this.splice('users', index, 1);
+        }
+        _countClick(e) {
+          let coso = e.model;
+          coso.set('user.count', coso.user.count + 1 );
+          console.log(coso.user.count);
+        }
+        _sort(a, b) {
+          return a.name > b.name;
+        }
+      }
+    customElements.define(MyComponent.is, MyComponent)
+  })(window.customElements);
+  </script>
+</dom-module>

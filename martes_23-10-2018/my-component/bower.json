@@ -1,0 +1,13 @@
+{
+  "name": "my-component",
+  "authors": [
+    "Jose Alfredo Hernandez Noriega <josealfredo.hernandez.noriega.contractor@bbva.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "polymer": "^2.0.0"
+  }
+}

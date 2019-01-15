@@ -1,0 +1,45 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="./componente-hijo.html">
+<dom-module id="componente-padre">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+    </style>
+    <h1>hola</h1>
+    <componente-hijo values-array="{{arrayValues}}" index-as='index'></componente-hijo>
+    <ul>
+      <template is="dom-repeat" items="{{arrayValues}}">
+      <li>
+        {{item}}
+      </li>
+      </template>
+    </ul>
+  </template>
+  <script>
+    (function componentePadre(customElements) {
+      'use strict';
+      class ComponentePadre  extends Polymer.Element {
+        static get is() {return 'componente-padre'};
+
+        static get properties() {
+          return {
+            arrayValues: {
+              type: Array,
+              observer: 'arrayContent'
+            }
+          }
+        }
+        ready() {
+          super.ready();
+          console.log('ready-padre');
+        }
+        arrayContent(n) {
+          console.log(n);
+        }
+      }
+    customElements.define(ComponentePadre.is, ComponentePadre)
+  })(window.customElements);
+  </script>
+</dom-module>

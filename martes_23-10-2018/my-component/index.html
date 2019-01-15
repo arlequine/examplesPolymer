@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My component</title>
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="src/my-component.html">
+  </head>
+  <body>
+    <input type="text" name="name" id="inputNative">
+    <my-component name="asdfgh"></my-component>
+  </body>
+  <script>
+    const component = document.querySelector('my-component');
+    const native = document.getElementById('inputNative');
+    component.addEventListener('text-changed', function(e) {
+      let text = e.detail.text;
+      native.value = text;
+      console.log('index-->>',e.detail.text);
+    });
+    component.addEventListener('name-changed', function() {
+      console.log('cambio');
+    })
+  </script>
+</html>
+<!-- computed sirve para asignarle un valor a la propiedad despues de ejecutarse el metodo -->
+
+
+<!-- el two way -> se utiliza para esperar que se genere una respuesta, el componente hijo recibe propiedad
+el one way -> solo se dirije hacia abajo, hacia la propiedad y no importa si setea, o cambia -->

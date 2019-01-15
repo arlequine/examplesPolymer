@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="componente-hijo">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+    </style>
+    <input type="text" name="name" value="{{text::input}}">
+    <!-- <button type="button" name="button">Add user</button> -->
+  </template>
+  <script>
+    (function componenteHijo() {
+      'use strict';
+      class ComponenteHijo extends Polymer.Element {
+        static get is() {return 'componente-hijo';}
+        static get properties() {
+          return {
+            text: {
+              Type: String,
+              observer: '_textArray'
+            },
+            valuesArray: {
+              type: Array,
+              value: [],
+              notify: true
+            }
+          }
+        }
+        _textArray(newValue, oldValue) {
+          console.log(newValue);
+          this.push('valuesArray', newValue);
+        }
+      }
+      customElements.define(ComponenteHijo.is, ComponenteHijo)
+    })(window.customElements);
+  </script>
+</dom-module>
